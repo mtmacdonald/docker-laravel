@@ -1,4 +1,7 @@
-image
-=====
+Web
+===
 
-A server environment for Laravel PHP applications, based on Docker
+A docker container for Laravel applications.
+
+- NGINX
+- PHP5
