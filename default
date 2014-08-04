@@ -1,0 +1,27 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server ipv6only=on;
+
+	root /data/www;
+	index index.php index.html index.htm;
+
+	# Make site accessible from http://localhost/
+	server_name localhost;
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ index.php?$query_string;
+
+	}
+
+        location ~ \.php$ {
+		try_files $uri /index.php =404;
+		fastcgi_split_path_info ^(.+\.php)(/.+)$;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		include fastcgi_params;
+        }
+}
+
