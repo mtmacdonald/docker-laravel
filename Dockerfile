@@ -108,7 +108,11 @@ ADD selenium /etc/init.d/selenium
 RUN chmod 755 /etc/init.d/selenium
 
 # PhantomJS headless browser (Ubuntu package is tool old)
-RUN curl -L -o /usr/bin/phantomjs https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
+RUN curl -L -o /tmp/phantomjs.tar.bz https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.7-linux-x86_64.tar.bz2
+RUN mkdir /tmp/phantomjs
+RUN tar -xjvf /tmp/phantomjs.tar.bz -C /tmp/phantomjs --strip 1
+RUN cp /tmp/phantomjs/bin/phantomjs /usr/bin/phantomjs
+RUN chmod 755 /usr/bin/phantomjs
 
 # ------------------------------------------------------------------------------
 # Prepare image for use
