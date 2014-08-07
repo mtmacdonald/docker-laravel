@@ -26,6 +26,8 @@ RUN apt-get -qqy install openssh-server
 # ------------------------------------------------------------------------------
 # Install NGINX, PHP5, MySQL server stack for Laravel
 # 
+# Must use PHP MySQL native drivers (php5-mysqlnd and not php5-mysql)
+#
 # Laravel requires the mcyrpt PHP extension
 # ------------------------------------------------------------------------------
 
