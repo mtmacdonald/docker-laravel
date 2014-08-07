@@ -116,6 +116,10 @@ RUN tar -xjvf /tmp/phantomjs.tar.bz -C /tmp/phantomjs --strip 1
 RUN cp /tmp/phantomjs/bin/phantomjs /usr/bin/phantomjs
 RUN chmod 755 /usr/bin/phantomjs
 
+# Enable XDEBUG (for remote code coverage reports)
+RUN apt-get -qqy install php5-xdebug
+ADD xdebug.ini /etc/php5/mods-available/xdebug.ini
+
 # ------------------------------------------------------------------------------
 # Prepare image for use
 # ------------------------------------------------------------------------------
