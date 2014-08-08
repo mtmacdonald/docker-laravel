@@ -125,7 +125,12 @@ ADD xdebug.ini /etc/php5/mods-available/xdebug.ini
 # ------------------------------------------------------------------------------
 
 # Expose ports
-EXPOSE 80
+EXPOSE 80 3306
+
+# Copy the start script
+ADD start.sh /start.sh
+RUN chmod 755 /start.sh
+CMD /start.sh
 
 # ------------------------------------------------------------------------------
 # Clean up
