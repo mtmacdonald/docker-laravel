@@ -22,6 +22,7 @@ RUN apt-get -qqy install git
 
 # SSH server
 RUN apt-get -qqy install openssh-server
+ADD sshd_config /etc/ssh/sshd_config
 
 # ------------------------------------------------------------------------------
 # Install NGINX, PHP5, MySQL server stack for Laravel
@@ -47,11 +48,6 @@ RUN php5enmod mcrypt
 RUN apt-get -qqy install mysql-client
 RUN apt-get -qqy install mysql-server pwgen
 ADD my.cnf /etc/mysql/my.cnf
-ADD setup.sh /tmp/setup.sh
-RUN chmod 755 /tmp/setup.sh
-
-# Start the MySQL service and run setup script
-RUN service mysql restart && /tmp/setup.sh
 
 # ------------------------------------------------------------------------------
 # Install Composer PHP dependency manager
@@ -125,7 +121,7 @@ ADD xdebug.ini /etc/php5/mods-available/xdebug.ini
 # ------------------------------------------------------------------------------
 
 # Expose ports
-EXPOSE 80 3306
+EXPOSE 80 22 3306 
 
 # Copy the start script
 ADD start.sh /start.sh
