@@ -72,3 +72,8 @@ apt-get -y install git
 # install the latest version of composer
 php -r "readfile('https://getcomposer.org/installer');" | php
 mv composer.phar /usr/local/bin/composer
+
+# ------------------------------------------------------------------------------
+# Clean up
+# ------------------------------------------------------------------------------
+rm -rf /provision
