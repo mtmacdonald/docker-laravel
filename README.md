@@ -1,8 +1,14 @@
-Web
-===
+Ubuntu Docker container for Laravel web applications
+====================================================
 
-A Docker container for Laravel applications.
+Larazest/base is a minimal base image for running [Laravel]
+(https://github.com/laravel/laravel) applications.
 
 - NGINX
-- PHP5
-- MySQL
+- PHP5 with mcyrpt and mysqlnd
+- MySQL client and server
+- Git
+- Composer
+
+It extends [phusion/baseimage-docker]
+(https://github.com/phusion/baseimage-docker).
