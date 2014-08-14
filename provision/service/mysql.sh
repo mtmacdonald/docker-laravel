@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# if /share/data doesn't exist, copy the default MySQL data directory
-if [ ! -f /share/data/ibdata1 ]; then
-	mkdir -p /share/data
-	cp -r /var/lib/mysql/* /share/data
-	chown -R mysql /share/data
-fi
-
 # fetch the debian-sys-maint password
 PASS=$(awk '/^password/ {print $3; exit}' /etc/mysql/debian.cnf)
 

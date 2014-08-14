@@ -4,7 +4,7 @@
 server {
         listen   80 default_server;
 
-        root /share/web/public/;
+        root /share/public/;
         index index.php index.html index.htm;
 
         location / {
