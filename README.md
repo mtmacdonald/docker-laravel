@@ -5,7 +5,7 @@ Larazest/base is a minimal base image for running [Laravel]
 (https://github.com/laravel/laravel) applications.
 
 - NGINX
-- PHP5 with mcyrpt and mysqlnd
+- PHP5 with mcrypt and mysqlnd
 - MySQL client and server
 - Git
 - Composer
