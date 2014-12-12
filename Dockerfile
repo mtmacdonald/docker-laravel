@@ -7,7 +7,7 @@
 # see https://github.com/phusion/baseimage-docker
 # ------------------------------------------------------------------------------
 
-FROM phusion/baseimage:0.9.12
+FROM ubuntu:14.04
 
 MAINTAINER Mark Macdonald <mark.t.macdonald@googlemail.com>
 
@@ -15,8 +15,8 @@ MAINTAINER Mark Macdonald <mark.t.macdonald@googlemail.com>
 ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
-# Use baseimage-docker's init system
-CMD ["/sbin/my_init"]
+# Use Supervisor to run and manage all other services
+CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisor.conf"]
 
 # ------------------------------------------------------------------------------
 # Provision the server
