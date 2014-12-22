@@ -21,12 +21,12 @@ apt-get -y install python
 # Install Supervisor
 # ------------------------------------------------------------------------------
 
-mkdir -p /etc/supervisor/conf.d
+mkdir -p /etc/supervisord/
 mkdir /var/log/supervisord
 
 # copy all conf files
-cp /provision/conf/supervisor/supervisor.conf /etc/supervisor.conf
-cp /provision/conf/supervisor/conf.d/* /etc/supervisor/conf.d
+cp /provision/conf/supervisor.conf /etc/supervisord.conf
+cp /provision/service/* /etc/supervisord/
 
 curl https://bootstrap.pypa.io/ez_setup.py -o - | python
 
@@ -51,12 +51,13 @@ chmod 600 /root/.ssh/authorized_keys
 # Install cron
 # ------------------------------------------------------------------------------
 
-
+apt-get -y install cron
 
 # ------------------------------------------------------------------------------
 # Install nano
 # ------------------------------------------------------------------------------
 
+apt-get -y install nano
 
 # ------------------------------------------------------------------------------
 # NGINX web server

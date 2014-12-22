@@ -16,7 +16,7 @@ ENV HOME /root
 ENV DEBIAN_FRONTEND noninteractive
 
 # Use Supervisor to run and manage all other services
-CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisor.conf"]
+CMD ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
 # ------------------------------------------------------------------------------
 # Provision the server
