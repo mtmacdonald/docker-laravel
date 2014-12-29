@@ -51,18 +51,18 @@ Connecting to a container with SSH
 Larazest/base ships with SSH server for accessing a terminal inside the container. For convenience, it is preconfigured 
 with an insecure key that should be replaced for production use. To connect with the insecure key:
 
-1. Fetch the insecure SSH key:
+**1.** Fetch the insecure SSH key:
 
 	cd /home/
 	curl -o insecure_key -fSL https://github.com/larazest/base/raw/master/provision/keys/insecure_key
 	chown whoami insecure_key
 	chmod 600 insecure_key
 
-2. Find the I.P. address of the container:
+**2.** Find the I.P. address of the container:
 
 	docker inspect container_name | grep IPA
 
-3. Connect with SSH:
+**3.** Connect with SSH:
 
 	ssh -i /home/insecure_key root@<IP address>
 
@@ -70,23 +70,20 @@ with an insecure key that should be replaced for production use. To connect with
 
 For production, replace the insecure private key with a true private key:
 
-1. In the host, generate a new public-private key pair (enter 'production.key') when prompted:
+**1.** In the host, generate a new public-private key pair (enter 'production.key') when prompted:
 
 	cd /home
 	sudo ssh-keygen -t rsa
 	sudo chmod 644 production.key
 
-There should then be two new files in the */home* directory:
+There should then be two new files in the */home* directory: i) production.key ii) production.key.pub
 
-- production.key
-- production.key.pub
-
-2. Copy *production.key.pub* to */root/.ssh/authorized_keys* in the container. Note this is an overwrite, not an append 
+**2.** Copy *production.key.pub* to */root/.ssh/authorized_keys* in the container. Note this is an overwrite, not an append 
 (so all previously valid keys, including *insecure_key* will be removed).
 
 	cat /home/production.key.pub | ssh -i /home/insecure_key root@<IP address> "cat > /root/.ssh/authorized_keys"
 
-3. Connect with SSH:
+**3.** Connect with SSH:
 
 	ssh -i /home/production.key root@<IP address>
 
