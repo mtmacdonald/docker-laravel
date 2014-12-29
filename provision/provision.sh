@@ -69,12 +69,8 @@ apt-get -y install nginx
 # copy a development-only default site configuration
 cp /provision/conf/nginx-development /etc/nginx/sites-available/default
 
-# disable 'daemonize' in nginx (because we use runit instead)
+# disable 'daemonize' in nginx (because we use supervisor instead)
 echo "daemon off;" >> /etc/nginx/nginx.conf
-
-# use runit to supervise nginx
-mkdir /etc/service/nginx
-cp /provision/service/nginx.sh /etc/service/nginx/run
 
 # ------------------------------------------------------------------------------
 # PHP5
@@ -93,9 +89,6 @@ php5enmod mcrypt
 # disable 'daemonize' in php5-fpm (because we use supervisor instead)
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php5/fpm/php-fpm.conf
 
-# use Supervisor supervise php5-fpm
-# cp /provision/service/phpfpm.sh /etc/service/phpfpm/run
-
 # ------------------------------------------------------------------------------
 # MySQL server
 # ------------------------------------------------------------------------------
@@ -106,10 +99,6 @@ apt-get -y install mysql-server pwgen
 
 # copy MySQL configuration
 cp /provision/conf/my.cnf /etc/mysql/my.cnf
-
-# use runit to supervise mysql
-# mkdir /etc/service/mysql
-# cp /provision/service/mysql.sh /etc/service/mysql/run
 
 # ------------------------------------------------------------------------------
 # Git version control
@@ -131,14 +120,6 @@ mv composer.phar /usr/local/bin/composer
 # ------------------------------------------------------------------------------
 
 apt-get -y install beanstalkd
-
-# use runit to supervise beanstalkd
-# mkdir /etc/service/beanstalkd
-# cp /provision/service/beanstalkd.sh /etc/service/beanstalkd/run
-
-# use runit to supervise the 'php artisan queue:listen' command
-# mkdir /etc/service/queue
-# cp /provision/service/queue.sh /etc/service/queue/run
 
 # ------------------------------------------------------------------------------
 # Clean up
