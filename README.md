@@ -29,11 +29,11 @@ Larazest/base is inspired by [phusion/baseimage-docker](https://github.com/phusi
 Running a container
 -------------------
 
-1. Download the public Docker image from Dockerhub:
+**1.** Download the public Docker image from Dockerhub:
 
 	docker pull larazest/base:1.1.0
 
-2. Run the Docker image as a new Docker container:
+**2.** Run the Docker image as a new Docker container:
 
 	docker run -d \
 	-p 80:80 -p 443:443 -p 3306:3306 \
