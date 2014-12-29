@@ -4,7 +4,6 @@
 
 # ------------------------------------------------------------------------------
 # Start with a Ubuntu 14.04 base image that has been optimised for Docker use
-# see https://github.com/phusion/baseimage-docker
 # ------------------------------------------------------------------------------
 
 FROM ubuntu:14.04
