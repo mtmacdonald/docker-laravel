@@ -55,7 +55,7 @@ with an insecure key that should be replaced for production use. To connect with
 
 	cd /home/
 	curl -o insecure_key -fSL https://github.com/larazest/base/raw/master/provision/keys/insecure_key
-	chown whoami insecure_key
+	chown `whoami` insecure_key
 	chmod 600 insecure_key
 
 **2.** Find the I.P. address of the container:
@@ -104,7 +104,7 @@ Laravel is not bundled in the Docker image. Laravel, or you own application, nee
 *In the container*:
 
 	cd /share
-	git clone https://laravel-or-your-application .
+	git clone https://github.com/laravel/laravel .
 	composer install
 
 Queue:listen
