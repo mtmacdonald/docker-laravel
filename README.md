@@ -99,7 +99,7 @@ Process status
 Installing Laravel
 ------------------
 
-Laravel is not bundled in the Docker image. Laravel, or you own application, need to be installed manually:
+Laravel is not bundled in the Docker image. Laravel, or your own application, need to be installed manually:
 
 *In the container*:
 
