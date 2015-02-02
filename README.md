@@ -16,6 +16,7 @@ These services run with process supervision, using [Supervisor](http://superviso
 
 Additionally, these packages are preinstalled:
 
+- nodejs with npm
 - nano
 - git
 - php5-cli
