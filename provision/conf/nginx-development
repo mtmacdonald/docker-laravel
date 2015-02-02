@@ -2,6 +2,7 @@
 # And this tutorial: https://www.digitalocean.com/community/tutorials/how-to-install-laravel-with-nginx-on-an-ubuntu-12-04-lts-vps
 
 server {
+        client_max_body_size 100M;
         listen   80 default_server;
 
         root /share/public/;
