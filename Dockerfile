@@ -1,9 +1,9 @@
 # ------------------------------------------------------------------------------
-# Docker provisioning script for the Larazest web server stack
+# Docker provisioning script for the docker-laravel web server stack
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Start with a Ubuntu 14.04 base image that has been optimised for Docker use
+# Start with the official Ubuntu 14.04 base image
 # ------------------------------------------------------------------------------
 
 FROM ubuntu:14.04

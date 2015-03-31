@@ -1,8 +1,10 @@
 Ubuntu Docker container for Laravel web applications
 ====================================================
 
-Larazest/base is a minimal base image for running [Laravel](https://github.com/laravel/laravel) applications. Required 
-packages are bundled into a single container, based on Ubuntu 14.04 server.
+Docker-laravel is a LEMP base image for running [Laravel](https://github.com/laravel/laravel) web applications. It
+is loosely inspired by [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker).
+
+Required and optional packages are bundled into a single container, based on Ubuntu 14.04 server.
 
 These services run with process supervision, using [Supervisor](http://supervisord.org):
 
@@ -12,9 +14,13 @@ These services run with process supervision, using [Supervisor](http://superviso
 - openssh-server
 - cron
 - beanstalkd
-- artisan queue:listen (optional, see below)
 
-Additionally, these packages are preinstalled:
+Additionally, these services can optionally be enabled for process supervision (see below):
+
+- artisan queue:listen
+- selenium server (for testing, not production)
+
+These packages are preinstalled:
 
 - nodejs with npm
 - nano
@@ -23,23 +29,25 @@ Additionally, these packages are preinstalled:
 - mysql-client
 - composer
 - curl
+- phantomjs
+- wkhtmltopdf
+- php5-xdebug (installed, but disabled by default)
 - python (*dependency for supervisord)
-
-Larazest/base is inspired by [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker).
+- default-jre (*dependency for Selenium server)
 
 Running a container
 -------------------
 
 **1.** Download the public Docker image from Dockerhub:
 
-	docker pull larazest/base:1.1.0
+	docker pull mtmacdonald/docker-laravel:1.4.0
 
 **2.** Run the Docker image as a new Docker container:
 
 	docker run -d \
 	-p 80:80 -p 443:443 -p 3306:3306 \
 	-v /home/app:/share \
-	larazest/base:1.1.0
+	mtmacdonald/docker-laravel:1.4.0
 
 Replace '/home/app' with the path to the Laravel application's root directory in the host. This directory is a shared 
 volume and so can be used to access the application files in either the host or the container.
@@ -49,13 +57,13 @@ Connecting to a container with SSH
 
 **Development use (insecure)**
 
-Larazest/base ships with SSH server for accessing a terminal inside the container. For convenience, it is preconfigured 
+Docker-laravel ships with SSH server for accessing a terminal inside the container. For convenience, it is preconfigured 
 with an insecure key that should be replaced for production use. To connect with the insecure key:
 
 **1.** Fetch the insecure SSH key:
 
 	cd /home/
-	curl -o insecure_key -fSL https://github.com/larazest/base/raw/master/provision/keys/insecure_key
+	curl -o insecure_key -fSL https://github.com/mtmacdonald/docker-laravel/raw/master/provision/keys/insecure_key
 	chown `whoami` insecure_key
 	chmod 600 insecure_key
 
