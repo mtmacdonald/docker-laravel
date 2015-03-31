@@ -6,20 +6,16 @@
 apt-get update
 
 # ------------------------------------------------------------------------------
-# Install curl
+# curl
 # ------------------------------------------------------------------------------
 
 apt-get -y install curl libcurl3 libcurl3-dev php5-curl
 
 # ------------------------------------------------------------------------------
-# Install python (required for Supervisor)
+# Supervisor
 # ------------------------------------------------------------------------------
 
-apt-get -y install python
-
-# ------------------------------------------------------------------------------
-# Install Supervisor
-# ------------------------------------------------------------------------------
+apt-get -y install python # Install python (required for Supervisor)
 
 mkdir -p /etc/supervisord/
 mkdir /var/log/supervisord
@@ -33,7 +29,7 @@ curl https://bootstrap.pypa.io/ez_setup.py -o - | python
 easy_install supervisor
 
 # ------------------------------------------------------------------------------
-# Install SSH
+# SSH
 # ------------------------------------------------------------------------------
 
 apt-get -y install openssh-server
@@ -48,13 +44,13 @@ cp /provision/keys/insecure_key.pub /root/.ssh/authorized_keys
 chmod 600 /root/.ssh/authorized_keys
 
 # ------------------------------------------------------------------------------
-# Install cron
+# cron
 # ------------------------------------------------------------------------------
 
 apt-get -y install cron
 
 # ------------------------------------------------------------------------------
-# Install nano
+# nano
 # ------------------------------------------------------------------------------
 
 apt-get -y install nano
@@ -127,6 +123,18 @@ mv composer.phar /usr/local/bin/composer
 # ------------------------------------------------------------------------------
 
 apt-get -y install beanstalkd
+
+# ------------------------------------------------------------------------------
+# wkhtmltopdf (PDF generator)
+#
+# Ubuntu ships with an old version so instead copy tool from this repository
+#
+# Libxrender is used for headless PDF generation on servers without a GUI
+# ------------------------------------------------------------------------------
+
+# wkhtmltopdf
+apt-get -y install libxrender1
+cp /provision/bin/wkhtmltopdf /usr/bin/wkhtmltopdf
 
 # ------------------------------------------------------------------------------
 # Clean up
