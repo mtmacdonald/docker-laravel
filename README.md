@@ -31,7 +31,7 @@ These packages are preinstalled:
 - curl
 - phantomjs
 - wkhtmltopdf
-- php5-xdebug (installed, but disabled by default)
+- php5-xdebug (installed, but disabled by default, see below)
 - python (*dependency for supervisord)
 - default-jre (*dependency for Selenium server)
 
@@ -47,6 +47,8 @@ Running a container
 	docker run -d \
 	-p 80:80 -p 443:443 -p 3306:3306 \
 	-v /home/app:/share \
+	--restart=always \
+	--name=appname \
 	mtmacdonald/docker-laravel:1.4.0
 
 Replace '/home/app' with the path to the Laravel application's root directory in the host. This directory is a shared 
@@ -63,7 +65,7 @@ with an insecure key that should be replaced for production use. To connect with
 **1.** Fetch the insecure SSH key:
 
 	cd /home/
-	curl -o insecure_key -fSL https://github.com/mtmacdonald/docker-laravel/raw/master/provision/keys/insecure_key
+	curl -o insecure_key -fSL https://raw.githubusercontent.com/mtmacdonald/docker-laravel/master/provision/keys/insecure_key
 	chown `whoami` insecure_key
 	chmod 600 insecure_key
 
@@ -121,3 +123,15 @@ Queue:listen
 
 The queue listener (**php artisan queue:listen**) can be added as supervised process by uncommenting the lines in
 **/etc/supervisord/queue.conf** (in the container).
+
+Selenium server
+---------------
+
+Selenium server (for automated headless browser testing with PhantomJS) is installed but does not run by default. 
+Uncomment the lines in **/etc/supervisord/selenium.conf** to add selenium as a supervised process.
+
+XDEBUG
+------
+
+The XDEBUG PHP extension is installed but not enabled by default. To enable it, uncomment the lines in 
+**/etc/php5/mods-available/xdebug.ini**.
