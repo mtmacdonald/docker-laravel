@@ -124,14 +124,18 @@ Queue:listen
 The queue listener (**php artisan queue:listen**) can be added as supervised process by uncommenting the lines in
 **/etc/supervisord/queue.conf** (in the container).
 
-Selenium server
----------------
-
-Selenium server (for automated headless browser testing with PhantomJS) is installed but does not run by default. 
-Uncomment the lines in **/etc/supervisord/selenium.conf** to add selenium as a supervised process.
-
 XDEBUG
 ------
 
 The XDEBUG PHP extension is installed but not enabled by default. To enable it, uncomment the lines in 
 **/etc/php5/mods-available/xdebug.ini**.
+
+Selenium server
+---------------
+
+Selenium server is no longer installed by default (due to large size - it requires the JRE as a dependency).
+It can be installed manually in a container by running: 
+
+	./selenium-setup.sh
+
+Uncomment the lines in **/etc/supervisord/selenium.conf** to add selenium as a supervised process.

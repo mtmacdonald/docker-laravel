@@ -1,6 +1,6 @@
 #!/bin/bash
 # ------------------------------------------------------------------------------
-# Provisioning script for the Larazest web server stack
+# Provisioning script for the docker-laravel web server stack
 # ------------------------------------------------------------------------------
 
 apt-get update
@@ -132,35 +132,34 @@ apt-get -y install beanstalkd
 # Libxrender is used for headless PDF generation on servers without a GUI
 # ------------------------------------------------------------------------------
 
-# wkhtmltopdf
 apt-get -y install libxrender1
 cp /provision/bin/wkhtmltopdf /usr/bin/wkhtmltopdf
 
 # ------------------------------------------------------------------------------
-# Install test tools
-# Selenium and XDEBUG are installed but disabled by default
+# PhantomJS (headless browser)
+#
+# (Ubuntu package is tool old)
 # ------------------------------------------------------------------------------
 
-# Selenium server (not available as a Ubuntu package)
-apt-get -y install default-jre
-mkdir /usr/local/selenium
-curl -o /usr/local/selenium/selenium.jar http://selenium-release.storage.googleapis.com/2.42/selenium-server-standalone-2.42.2.jar
-mkdir -p /var/log/selenium/
-chmod a+w /var/log/selenium/
-
-# install selenium as an optional service
-cp /provision/service/selenium.conf /etc/supervisord/selenium.conf
-
-# PhantomJS headless browser (Ubuntu package is tool old)
 curl -L -o /tmp/phantomjs.tar.bz2 https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-1.9.8-linux-x86_64.tar.bz2
 mkdir /tmp/phantomjs
 tar xvfj /tmp/phantomjs.tar.bz2 -C /tmp/phantomjs --strip 1
 cp /tmp/phantomjs/bin/phantomjs /usr/bin/phantomjs
 chmod +x /usr/bin/phantomjs
 
-# XDEBUG config (for remote code coverage reports) is commented out
+# ------------------------------------------------------------------------------
+# XDEBUG (installed but disabled by default)
+# ------------------------------------------------------------------------------
+
 apt-get -y install php5-xdebug
 cp /provision/conf/xdebug.ini /etc/php5/mods-available/xdebug.ini
+
+# ------------------------------------------------------------------------------
+# Copy an install script for Selenium server PhantomJS (test tool)
+# This is no longer installed by default because it requires the JRE and is large
+# ------------------------------------------------------------------------------
+
+cp /provision/bin/selenium-setup.sh /home/selenium-setup.sh
 
 # ------------------------------------------------------------------------------
 # Clean up
