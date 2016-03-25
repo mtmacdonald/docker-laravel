@@ -58,6 +58,9 @@ apt-get -y install nano
 # ------------------------------------------------------------------------------
 # NGINX web server
 # ------------------------------------------------------------------------------
+add-apt-repository ppa:nginx/stable
+
+apt-get update
 
 # install nginx
 apt-get -y install nginx
