@@ -1,0 +1,49 @@
+# See also Taylor Ottwell's Laravel Homestead NGINX configuration: https://github.com/laravel/homestead/blob/master/scripts/serve.sh
+# And this tutorial: https://www.digitalocean.com/community/tutorials/how-to-install-laravel-with-nginx-on-an-ubuntu-12-04-lts-vps
+
+# Redirect any http:// request to https://example.com
+server {
+    listen 80;
+    return 301 https://example.com$request_uri;
+}
+
+# Redirect https://www.example.com to https://example.com
+server {
+    listen 443 ssl;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    server_name www.example.com;
+    ssl_certificate /share/deploy/certificates/example.com.crt;
+    ssl_certificate_key /share/deploy/certificates/example.com.key;
+    return 301 https://example.com$request_uri;
+}
+
+server {
+    client_max_body_size 500M;
+    listen  443 ssl;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    server_name example.com;
+    ssl_certificate /share/deploy/certificates/example.com.crt;
+    ssl_certificate_key /share/deploy/certificates/example.com.key;
+
+    root /share/public/;
+    index index.php index.html index.htm;
+
+    location / {
+         try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    # pass the PHP scripts to FastCGI server
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_intercept_errors off;
+        fastcgi_buffer_size 16k;
+        fastcgi_buffers 4 16k;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_read_timeout 300;
+    }
+}
