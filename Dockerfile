@@ -8,7 +8,7 @@
 # Start with a base image
 # ------------------------------------------------------------------------------
 
-FROM mtmacdonald/docker-base:1.1.0
+FROM mtmacdonald/docker-base:1.1.1
 
 MAINTAINER Mark Macdonald <mark.t.macdonald@googlemail.com>
 
