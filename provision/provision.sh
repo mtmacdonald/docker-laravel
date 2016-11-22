@@ -28,9 +28,15 @@ apt-get -y install php-fpm php-cli
 cp /provision/service/php-fpm.conf /etc/supervisord/php-fpm.conf
 mkdir -p /var/run/php
 
-apt-get install php-mbstring php-xml php-mysqlnd
-phpenmod mbstring
-phpenmod php-xml
+apt-get -y install php-mbstring php-xml php-mysqlnd php-curl
+
+#apt-get -y install php-mbstring
+#phpenmod mbstring
+#phpenmod -s cli mbstring
+
+#apt-get -y install php-xml
+#phpenmod xml
+#phpenmod -s cli xml
 
 # disable 'daemonize' in php-fpm (because we use supervisor instead)
 sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm.conf
@@ -40,7 +46,9 @@ sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/php-fpm.con
 # ------------------------------------------------------------------------------
 
 apt-get -y install php-xdebug
-cp /provision/conf/xdebug.ini /etc/php5/mods-available/xdebug.ini
+#cp /provision/conf/xdebug.ini /etc/php/7.0/mods-available/xdebug.ini
+phpdismod xdebug
+phpdismod -s cli xdebug
 
 # ------------------------------------------------------------------------------
 # Composer PHP dependency manager
