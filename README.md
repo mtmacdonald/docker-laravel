@@ -19,7 +19,7 @@ These services run with process supervision:
 - php-fpm (with extensions required for Laravel 5, plus php5-mysqlnd and and php5-curl)
 - mariadb-server
 - beanstalkd
-- artisan queue:listen
+- artisan queue:listen (optional - uncomment /etc/supervisord/queue.conf)
 
 These packages are preinstalled:
 
