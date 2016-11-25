@@ -8,6 +8,9 @@ apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold"
 # ------------------------------------------------------------------------------
 # NGINX web server
 # ------------------------------------------------------------------------------
+add-apt-repository ppa:nginx/stable
+
+apt-get update
 
 apt-get -y install nginx
 cp /provision/service/nginx.conf /etc/supervisord/nginx.conf
